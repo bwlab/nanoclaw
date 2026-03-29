@@ -231,10 +231,13 @@ function buildContainerArgs(
   // Pass host timezone so container's local time matches the user's
   args.push('-e', `TZ=${TIMEZONE}`);
 
+  // Use host network so container can reach the credential proxy on localhost
+  args.push('--network', 'host');
+
   // Route API traffic through the credential proxy (containers never see real secrets)
   args.push(
     '-e',
-    `ANTHROPIC_BASE_URL=http://${CONTAINER_HOST_GATEWAY}:${CREDENTIAL_PROXY_PORT}`,
+    `ANTHROPIC_BASE_URL=http://127.0.0.1:${CREDENTIAL_PROXY_PORT}`,
   );
 
   // Mirror the host's auth method with a placeholder value.
@@ -247,9 +250,6 @@ function buildContainerArgs(
   } else {
     args.push('-e', 'CLAUDE_CODE_OAUTH_TOKEN=placeholder');
   }
-
-  // Runtime-specific args for host gateway resolution
-  args.push(...hostGatewayArgs());
 
   // Run as host user so bind-mounted files are accessible.
   // Skip when running as root (uid 0), as the container's node user (uid 1000),

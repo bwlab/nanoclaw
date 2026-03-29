@@ -1,0 +1,20 @@
+{
+  "comuni_completati": [
+    {
+      "nome": "Agliè",
+      "slug": "aglie",
+      "data": "2026-03-29",
+      "aziende_trovate": 56,
+      "aziende_filtrate": 14
+    },
+    {
+      "nome": "Airasca",
+      "slug": "airasca",
+      "data": "2026-03-29",
+      "aziende_trovate": 106,
+      "aziende_filtrate": 19
+    }
+  ],
+  "ultimo_comune": "Airasca",
+  "prossimo_indice": 2
+}
